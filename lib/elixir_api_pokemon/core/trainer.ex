@@ -11,7 +11,7 @@ defmodule ElixirApiPokemon.Core.Trainer do
         %__MODULE__{number_pokemons: number_pokemons, pokemons: current_pokemons} = trainer,
         pokemon_id
       )
-      when is_integer(number_pokemons) and number_pokemons < 6 do
+      when is_integer(number_pokemons) and number_pokemons < 6 and is_integer(pokemon_id) do
     new_trainer = %__MODULE__{
       trainer
       | number_pokemons: number_pokemons + 1,
@@ -29,7 +29,7 @@ defmodule ElixirApiPokemon.Core.Trainer do
         %__MODULE__{number_pokemons: number_pokemons, pokemons: current_pokemons} = trainer,
         pokemon_target_id
       )
-      when number_pokemons > 1 do
+      when number_pokemons > 1 and is_integer(pokemon_target_id) do
     case Enum.member?(current_pokemons, pokemon_target_id) do
       true ->
         new_trainer = %__MODULE__{
