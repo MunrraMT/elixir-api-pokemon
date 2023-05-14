@@ -61,7 +61,7 @@ defmodule Core.TrainerTest do
       assert Trainer.add_pokemon(trainer, 25) == {:ok, expected_response}
     end
 
-    test "should return a error when incorrect arguments is passed, and return trainer without changed" do
+    test "should return an error when incorrect arguments is passed, and return trainer without changed" do
       trainer = %Trainer{
         name: "Camila Maria",
         pokemons: [10],
@@ -106,7 +106,7 @@ defmodule Core.TrainerTest do
       assert Trainer.remove_pokemon(trainer, 25) == {:ok, expected_response}
     end
 
-    test "should return a error when pokemon id is not exist inside trainer, and return trainer without changed" do
+    test "should return an error when pokemon id is not exist inside trainer, and return trainer without changed" do
       trainer = %Trainer{
         name: "Camila Maria",
         pokemons: [10, 20],
@@ -116,7 +116,7 @@ defmodule Core.TrainerTest do
       assert Trainer.remove_pokemon(trainer, 30) == {:error, trainer}
     end
 
-    test "should return a error when incorrect arguments is passed, and return trainer without changed" do
+    test "should return an error when incorrect arguments is passed, and return trainer without changed" do
       trainer = %Trainer{
         name: "Camila Maria",
         pokemons: [10, 20],
@@ -125,6 +125,24 @@ defmodule Core.TrainerTest do
 
       assert Trainer.remove_pokemon(trainer, "25") == {:error, trainer}
       assert Trainer.remove_pokemon(trainer, "error") == {:error, trainer}
+    end
+  end
+
+  describe "ElixirApiPokemon.Core.Trainer.change_order_pokemon/3" do
+    test "should return a trainer Camila with pokemons 20 in first position" do
+      trainer = %Trainer{
+        name: "Camila Maria",
+        pokemons: [10, 20, 30],
+        number_pokemons: 3
+      }
+
+      expected_response = %Trainer{
+        name: "Camila Maria",
+        pokemons: [20, 10, 30],
+        number_pokemons: 3
+      }
+
+      assert Trainer.change_order_pokemon(trainer, 1, 0) == {:ok, expected_response}
     end
   end
 end
