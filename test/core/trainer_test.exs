@@ -8,7 +8,7 @@ defmodule Core.TrainerTest do
     test "should return a new trainer Maria with initial pokemon 4" do
       expected_response = %Trainer{
         name: "Maria Belizario",
-        pokemons: [4],
+        pokemons: %{0 => 4},
         number_pokemons: 1
       }
 
@@ -19,7 +19,7 @@ defmodule Core.TrainerTest do
     test "should return a new trainer Camila with initial pokemon 10" do
       expected_response = %Trainer{
         name: "Camila maria",
-        pokemons: [25],
+        pokemons: %{0 => 25},
         number_pokemons: 1
       }
 
