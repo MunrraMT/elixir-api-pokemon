@@ -1,5 +1,5 @@
 defmodule ElixirApiPokemon.Core.Trainer do
-  defstruct [:name, pokemons: [], number_pokemons: 0]
+  defstruct [:name, pokemons: %{}, number_pokemons: 0]
 
   def new(%{name: name, initial_pokemon_id: initial_pokemon_id})
       when is_integer(initial_pokemon_id) do
@@ -14,8 +14,8 @@ defmodule ElixirApiPokemon.Core.Trainer do
       when is_integer(number_pokemons) and number_pokemons < 6 and is_integer(pokemon_id) do
     new_trainer = %__MODULE__{
       trainer
-      | number_pokemons: number_pokemons + 1,
-        pokemons: current_pokemons ++ [pokemon_id]
+      | pokemons: Map.put(current_pokemons, number_pokemons, pokemon_id),
+        number_pokemons: number_pokemons + 1
     }
 
     {:ok, new_trainer}
