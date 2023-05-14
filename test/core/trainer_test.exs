@@ -4,7 +4,7 @@ defmodule Core.TrainerTest do
 
   alias ElixirApiPokemon.Core.Trainer
 
-  describe "ElixirApiPokemon.Core.Trainer.new/1" do
+  describe "new/1" do
     test "should return a new trainer Maria with initial pokemon 1" do
       expected_response = %Trainer{
         name: "Maria Belizario",
@@ -40,7 +40,7 @@ defmodule Core.TrainerTest do
     end
   end
 
-  describe "ElixirApiPokemon.Core.Trainer.add_pokemon/2" do
+  describe "add_pokemon/2" do
     test "should return a trainer Maria with pokemons 4 and 16" do
       trainer = %Trainer{
         name: "Maria Belizario",
@@ -85,7 +85,7 @@ defmodule Core.TrainerTest do
     end
   end
 
-  describe "ElixirApiPokemon.Core.Trainer.remove_pokemon/2" do
+  describe "remove_pokemon/2" do
     test "should return a trainer Maria with pokemons 4 and without 16" do
       trainer = %Trainer{
         name: "Maria Belizario",
@@ -130,7 +130,7 @@ defmodule Core.TrainerTest do
     end
   end
 
-  describe "ElixirApiPokemon.Core.Trainer.change_order_pokemon/3" do
+  describe "change_order_pokemon/3" do
     test "should return a trainer Camila with pokemons 20 in first position" do
       trainer = %Trainer{
         name: "Camila Maria",
