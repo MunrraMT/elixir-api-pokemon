@@ -5,26 +5,38 @@ defmodule Core.TrainerTest do
   alias ElixirApiPokemon.Core.Trainer
 
   describe "ElixirApiPokemon.Core.Trainer.new/1" do
-    test "should return a new trainer Maria with initial pokemon 4" do
+    test "should return a new trainer Maria with initial pokemon 1" do
       expected_response = %Trainer{
         name: "Maria Belizario",
+        pokemons: %{0 => 1},
+        number_pokemons: 1
+      }
+
+      assert Trainer.new("Maria Belizario", 1) == {:ok, expected_response}
+    end
+
+    test "should return a new trainer Camila with initial pokemon 7" do
+      expected_response = %Trainer{
+        name: "Camila maria",
+        pokemons: %{0 => 7},
+        number_pokemons: 1
+      }
+
+      assert Trainer.new("Camila maria", 7) == {:ok, expected_response}
+    end
+
+    test "should return a new trainer André with initial pokemon 4" do
+      expected_response = %Trainer{
+        name: "André Rodrigues",
         pokemons: %{0 => 4},
         number_pokemons: 1
       }
 
-      assert Trainer.new(%{name: "Maria Belizario", initial_pokemon_id: 4}) ==
-               {:ok, expected_response}
+      assert Trainer.new("André Rodrigues", 4) == {:ok, expected_response}
     end
 
-    test "should return a new trainer Camila with initial pokemon 10" do
-      expected_response = %Trainer{
-        name: "Camila maria",
-        pokemons: %{0 => 25},
-        number_pokemons: 1
-      }
-
-      assert Trainer.new(%{name: "Camila maria", initial_pokemon_id: 25}) ==
-               {:ok, expected_response}
+    test "should return an error when incorrect arguments is passed, and return trainer without changed" do
+      assert Trainer.new("Camila maria", 10) == {:error, "not created"}
     end
   end
 
