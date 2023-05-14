@@ -57,10 +57,10 @@ defmodule ElixirApiPokemon.Core.Trainer do
       when number_pokemons > 1 and
              is_integer(pokemon_origem_index) and
              pokemon_origem_index >= 0 and
-             pokemon_origem_index <= number_pokemons and
+             pokemon_origem_index < number_pokemons and
              is_integer(pokemon_target_index) and
-             pokemon_target_index <= number_pokemons and
-             pokemon_target_index >= 0 do
+             pokemon_target_index >= 0 and
+             pokemon_target_index < number_pokemons do
     pokemon_origem = Enum.at(current_pokemons, pokemon_origem_index)
     pokemon_target = Enum.at(current_pokemons, pokemon_target_index)
 
