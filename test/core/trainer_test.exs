@@ -32,13 +32,13 @@ defmodule Core.TrainerTest do
     test "should return a trainer Maria with pokemons 4 and 16" do
       trainer = %Trainer{
         name: "Maria Belizario",
-        pokemons: [4],
+        pokemons: %{0 => 4},
         number_pokemons: 1
       }
 
       expected_response = %Trainer{
         name: "Maria Belizario",
-        pokemons: [4, 16],
+        pokemons: %{0 => 4, 1 => 16},
         number_pokemons: 2
       }
 
@@ -48,13 +48,13 @@ defmodule Core.TrainerTest do
     test "should return a trainer Camila with pokemons 10 and 25" do
       trainer = %Trainer{
         name: "Camila Maria",
-        pokemons: [10],
+        pokemons: %{0 => 10},
         number_pokemons: 1
       }
 
       expected_response = %Trainer{
         name: "Camila Maria",
-        pokemons: [10, 25],
+        pokemons: %{0 => 10, 1 => 25},
         number_pokemons: 2
       }
 
@@ -64,7 +64,7 @@ defmodule Core.TrainerTest do
     test "should return an error when incorrect arguments is passed, and return trainer without changed" do
       trainer = %Trainer{
         name: "Camila Maria",
-        pokemons: [10],
+        pokemons: %{0 => 10},
         number_pokemons: 1
       }
 
