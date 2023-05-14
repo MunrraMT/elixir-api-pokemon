@@ -122,17 +122,27 @@ defmodule Core.TrainerTest do
     test "should return a trainer Camila with pokemons 20 in first position" do
       trainer = %Trainer{
         name: "Camila Maria",
-        pokemons: [10, 20, 30],
+        pokemons: %{0 => 10, 1 => 20, 2 => 30},
         number_pokemons: 3
       }
 
       expected_response = %Trainer{
         name: "Camila Maria",
-        pokemons: [20, 10, 30],
+        pokemons: %{0 => 20, 1 => 10, 2 => 30},
         number_pokemons: 3
       }
 
       assert Trainer.change_order_pokemon(trainer, 1, 0) == {:ok, expected_response}
+    end
+
+    test "should return an error when incorrect arguments is passed, and return trainer without changed" do
+      trainer = %Trainer{
+        name: "Camila Maria",
+        pokemons: %{0 => 10, 1 => 20, 2 => 30},
+        number_pokemons: 3
+      }
+
+      assert Trainer.change_order_pokemon(trainer, 3, 0) == {:error, trainer}
     end
   end
 end
