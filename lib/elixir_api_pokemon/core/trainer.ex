@@ -27,22 +27,28 @@ defmodule ElixirApiPokemon.Core.Trainer do
 
   def remove_pokemon(
         %__MODULE__{number_pokemons: number_pokemons, pokemons: current_pokemons} = trainer,
-        pokemon_target_id
+        pokemon_target_index
       )
-      when number_pokemons > 1 and is_integer(pokemon_target_id) do
-    case Enum.member?(current_pokemons, pokemon_target_id) do
-      true ->
-        new_trainer = %__MODULE__{
-          trainer
-          | number_pokemons: number_pokemons - 1,
-            pokemons: current_pokemons -- [pokemon_target_id]
-        }
+      when number_pokemons > 1 and
+             is_integer(pokemon_target_index) and
+             pokemon_target_index < number_pokemons do
+    pokemon_filtered_list =
+      current_pokemons
+      |> Map.delete(pokemon_target_index)
+      |> Map.values()
 
-        {:ok, new_trainer}
+    new_pokemon_list =
+      0..(number_pokemons - 1)
+      |> Enum.zip(pokemon_filtered_list)
+      |> Enum.into(%{})
 
-      false ->
-        {:error, trainer}
-    end
+    new_trainer = %__MODULE__{
+      trainer
+      | number_pokemons: number_pokemons - 1,
+        pokemons: new_pokemon_list
+    }
+
+    {:ok, new_trainer}
   end
 
   def remove_pokemon(%__MODULE__{} = trainer, _pokemon_id) do
