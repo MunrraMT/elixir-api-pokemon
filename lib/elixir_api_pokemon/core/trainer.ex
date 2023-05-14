@@ -67,13 +67,13 @@ defmodule ElixirApiPokemon.Core.Trainer do
              is_integer(pokemon_target_index) and
              pokemon_target_index >= 0 and
              pokemon_target_index < number_pokemons do
-    pokemon_origem = Enum.at(current_pokemons, pokemon_origem_index)
-    pokemon_target = Enum.at(current_pokemons, pokemon_target_index)
+    pokemon_origem = Map.get(current_pokemons, pokemon_origem_index)
+    pokemon_target = Map.get(current_pokemons, pokemon_target_index)
 
     new_pokemon_list =
       current_pokemons
-      |> List.replace_at(pokemon_target_index, pokemon_origem)
-      |> List.replace_at(pokemon_origem_index, pokemon_target)
+      |> Map.replace(pokemon_target_index, pokemon_origem)
+      |> Map.replace(pokemon_origem_index, pokemon_target)
 
     new_trainer = %__MODULE__{
       trainer
