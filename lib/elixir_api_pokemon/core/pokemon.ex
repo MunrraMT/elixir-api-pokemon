@@ -60,4 +60,16 @@ defmodule ElixirApiPokemon.Core.Pokemon do
 
     {:ok, damage, precision}
   end
+
+  def attack_weak(
+        %__MODULE__{stats: %{attack: attack_value, special_attack: special_attack_value}} =
+          _pokemon
+      ) do
+    attack = (attack_value + special_attack_value) / 2
+    multiplier = 10..60 |> Enum.random()
+    damage = (attack * (multiplier / 100)) |> round()
+    precision = 40..100 |> Enum.random()
+
+    {:ok, damage, precision}
+  end
 end
