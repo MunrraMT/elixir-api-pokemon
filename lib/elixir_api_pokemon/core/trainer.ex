@@ -9,7 +9,7 @@ defmodule ElixirApiPokemon.Core.Trainer do
     %__MODULE__{name: name} |> add_pokemon(initial_pokemon_id)
   end
 
-  def new(_name, _initial_pokemon_id) do
+  def new(_name, _pokemon_id) do
     {:error, "not created"}
   end
 
