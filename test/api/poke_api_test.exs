@@ -4,6 +4,8 @@ defmodule Api.PokeApiTest do
 
   doctest(PokeApi)
 
+  @pokemon_test_id 4
+
   describe "get_kanto_pokemons/0" do
     test "should return a 150 first pokemons list" do
       assert length(PokeApi.get_kanto_pokemons()) == 150
@@ -12,7 +14,9 @@ defmodule Api.PokeApiTest do
 
   describe "get_pokemon_info/1" do
     test "should return pokemon info based on pokemon number passed by arguments" do
-      assert Map.fetch(PokeApi.get_pokemon_info(4), :id) == {:ok, 4}
+      %{"id" => id} = PokeApi.get_pokemon_info(@pokemon_test_id)
+
+      assert id == @pokemon_test_id
     end
   end
 end
