@@ -77,7 +77,7 @@ defmodule ElixirApiPokemon.Core.Pokemon do
         %__MODULE__{stats: %{attack: attack_value, special_attack: special_attack_value}} =
           pokemon
       ) do
-    multiplier = 10..30 |> Enum.random()
+    multiplier = (10..30 |> Enum.random()) + 100
     new_attack = (attack_value * (multiplier / 100)) |> round()
     new_special_attack = (special_attack_value * (multiplier / 100)) |> round()
 
