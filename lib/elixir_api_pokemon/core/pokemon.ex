@@ -72,4 +72,20 @@ defmodule ElixirApiPokemon.Core.Pokemon do
 
     {:ok, damage, precision}
   end
+
+  def attack_buff(
+        %__MODULE__{stats: %{attack: attack_value, special_attack: special_attack_value}} =
+          pokemon
+      ) do
+    multiplier = 10..30 |> Enum.random()
+    new_attack = (attack_value * (multiplier / 100)) |> round()
+    new_special_attack = (special_attack_value * (multiplier / 100)) |> round()
+
+    new_pokemon = %__MODULE__{
+      pokemon
+      | stats: %{attack: new_attack, special_attack: new_special_attack}
+    }
+
+    {:ok, new_pokemon}
+  end
 end
