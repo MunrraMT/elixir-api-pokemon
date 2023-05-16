@@ -48,10 +48,10 @@ defmodule Core.PokemonTest do
          }
        } = new_pokemon} = Pokemon.new(@pokemon_test_id)
 
-      min_damage = round((attack_value + special_attack_value) / 2 * (40 / 100))
-      min_precision = 10
+      min_damage = round((attack_value + special_attack_value) / 2 * (10 / 100))
+      min_precision = 40
 
-      {:ok, damage, precision} = Pokemon.attack_strong(new_pokemon)
+      {:ok, damage, precision} = Pokemon.attack_weak(new_pokemon)
 
       assert damage >= min_damage
       assert precision >= min_precision
