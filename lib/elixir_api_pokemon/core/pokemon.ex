@@ -88,4 +88,20 @@ defmodule ElixirApiPokemon.Core.Pokemon do
 
     {:ok, new_pokemon}
   end
+
+  def defense_buff(
+        %__MODULE__{stats: %{defense: defense_value, special_defense: special_defense_value}} =
+          pokemon
+      ) do
+    multiplier = (10..30 |> Enum.random()) + 100
+    new_defense = (defense_value * (multiplier / 100)) |> round()
+    new_special_defense = (special_defense_value * (multiplier / 100)) |> round()
+
+    new_pokemon = %__MODULE__{
+      pokemon
+      | stats: %{defense: new_defense, special_defense: new_special_defense}
+    }
+
+    {:ok, new_pokemon}
+  end
 end
