@@ -9,4 +9,10 @@ defmodule Api.PokeApiTest do
       assert length(PokeApi.get_kanto_pokemons()) == 150
     end
   end
+
+  describe "get_pokemon_info/1" do
+    test "should return pokemon info based on pokemon number passed by arguments" do
+      assert Map.fetch(PokeApi.get_pokemon_info(4), :id) == {:ok, 4}
+    end
+  end
 end
