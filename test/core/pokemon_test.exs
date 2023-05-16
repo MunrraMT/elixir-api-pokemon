@@ -19,7 +19,7 @@ defmodule Core.PokemonTest do
   end
 
   describe "attack_strong/1" do
-    test "should return damage and precision value based on pokemon stats if pokemon struct passed by argument" do
+    test "should return damage and precision value based on pokemon stats, if pokemon struct passed by argument" do
       {:ok,
        %Pokemon{
          stats: %{
@@ -39,7 +39,7 @@ defmodule Core.PokemonTest do
   end
 
   describe "attack_weak/1" do
-    test "should return damage and precision value based on pokemon stats if pokemon struct passed by argument" do
+    test "should return damage and precision value based on pokemon stats, if pokemon struct passed by argument" do
       {:ok,
        %Pokemon{
          stats: %{
@@ -55,6 +55,29 @@ defmodule Core.PokemonTest do
 
       assert damage >= min_damage
       assert precision >= min_precision
+    end
+  end
+
+  describe "attack_buff/1" do
+    test "should return pokemon attacks stats with 10-30% incremented, if pokemon struct passed by argument " do
+      {:ok,
+       %Pokemon{
+         stats: %{
+           attack: attack_value,
+           special_attack: special_attack_value
+         }
+       } = new_pokemon} = Pokemon.new(@pokemon_test_id)
+
+      {:ok,
+       %Pokemon{
+         stats: %{
+           attack: attack_value_incremented,
+           special_attack: special_attack_value_incremented
+         }
+       }} = Pokemon.attack_buff(new_pokemon)
+
+      assert attack_value < attack_value_incremented
+      assert special_attack_value < special_attack_value_incremented
     end
   end
 end
