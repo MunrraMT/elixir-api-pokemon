@@ -48,4 +48,16 @@ defmodule ElixirApiPokemon.Core.Pokemon do
   def new(_pokemon_id) do
     {:error, "not created"}
   end
+
+  def attack_strong(
+        %__MODULE__{stats: %{attack: attack_value, special_attack: special_attack_value}} =
+          _pokemon
+      ) do
+    attack = (attack_value + special_attack_value) / 2
+    multiplier = 40..100 |> Enum.random()
+    damage = (attack * (multiplier / 100)) |> round()
+    precision = 10..70 |> Enum.random()
+
+    {:ok, damage, precision}
+  end
 end
