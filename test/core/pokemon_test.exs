@@ -80,4 +80,24 @@ defmodule Core.PokemonTest do
       assert special_attack_value < special_attack_value_incremented
     end
   end
+
+  describe "defense_buff/1" do
+    test "should return pokemon defenses stats with 10-30% incremented, if pokemon struct passed by argument " do
+      {:ok,
+       %Pokemon{
+         stats: %{defense: defense_value, special_defense: special_defense_value}
+       } = new_pokemon} = Pokemon.new(@pokemon_test_id)
+
+      {:ok,
+       %Pokemon{
+         stats: %{
+           defense: defense_value_incremented,
+           special_defense: special_defense_value_incremented
+         }
+       }} = Pokemon.defense_buff(new_pokemon)
+
+      assert defense_value < defense_value_incremented
+      assert special_defense_value < special_defense_value_incremented
+    end
+  end
 end
