@@ -1,10 +1,10 @@
 defmodule Core.TrainerTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest(ElixirApiPokemon.Core.Trainer)
 
   alias ElixirApiPokemon.Core.Trainer
 
-  describe "new/1" do
+  describe "build/1" do
     test "should return a new trainer Maria with initial pokemon 1" do
       expected_response = %Trainer{
         name: "Maria Belizario",
@@ -12,7 +12,7 @@ defmodule Core.TrainerTest do
         number_pokemons: 1
       }
 
-      assert Trainer.new("Maria Belizario", 1) == {:ok, expected_response}
+      assert Trainer.build("Maria Belizario", 1) == {:ok, expected_response}
     end
 
     test "should return a new trainer Camila with initial pokemon 7" do
@@ -22,7 +22,7 @@ defmodule Core.TrainerTest do
         number_pokemons: 1
       }
 
-      assert Trainer.new("Camila maria", 7) == {:ok, expected_response}
+      assert Trainer.build("Camila maria", 7) == {:ok, expected_response}
     end
 
     test "should return a new trainer André with initial pokemon 4" do
@@ -32,11 +32,11 @@ defmodule Core.TrainerTest do
         number_pokemons: 1
       }
 
-      assert Trainer.new("André Rodrigues", 4) == {:ok, expected_response}
+      assert Trainer.build("André Rodrigues", 4) == {:ok, expected_response}
     end
 
     test "should return an error when incorrect arguments is passed, and return trainer without changed" do
-      assert Trainer.new("Camila maria", 10) == {:error, "not created"}
+      assert Trainer.build("Camila maria", 10) == {:error, "not created"}
     end
   end
 
