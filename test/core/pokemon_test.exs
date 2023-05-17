@@ -1,20 +1,20 @@
 defmodule Core.PokemonTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias ElixirApiPokemon.Core.Pokemon
 
   doctest(Pokemon)
 
   @pokemon_test_id 4
 
-  describe "new/1" do
+  describe "build/1" do
     test "should return a new pokemon struct when pokemon_id 4 passed by argument" do
-      {:ok, new_pokemon} = Pokemon.new(@pokemon_test_id)
+      {:ok, new_pokemon} = Pokemon.build(@pokemon_test_id)
 
       assert Map.get(new_pokemon, :id) == @pokemon_test_id
     end
 
     test "should return error if an incorrect argument passed" do
-      assert Pokemon.new("pokemon_test_id") == {:error, "not created"}
+      assert Pokemon.build("pokemon_test_id") == {:error, "not created"}
     end
   end
 
@@ -26,7 +26,7 @@ defmodule Core.PokemonTest do
            attack: attack_value,
            special_attack: special_attack_value
          }
-       } = new_pokemon} = Pokemon.new(@pokemon_test_id)
+       } = new_pokemon} = Pokemon.build(@pokemon_test_id)
 
       min_damage = round((attack_value + special_attack_value) / 2 * (40 / 100))
       min_precision = 10
@@ -38,6 +38,15 @@ defmodule Core.PokemonTest do
     end
   end
 
+  describe "get_random_pokemon/0" do
+    test "should return a random pokemon" do
+      {:ok, new_pokemon} = Pokemon.get_random_pokemon()
+      %struct_name{} = new_pokemon
+
+      assert struct_name == Pokemon
+    end
+  end
+
   describe "attack_weak/1" do
     test "should return damage and precision value based on pokemon stats, if pokemon struct passed by argument" do
       {:ok,
@@ -46,7 +55,7 @@ defmodule Core.PokemonTest do
            attack: attack_value,
            special_attack: special_attack_value
          }
-       } = new_pokemon} = Pokemon.new(@pokemon_test_id)
+       } = new_pokemon} = Pokemon.build(@pokemon_test_id)
 
       min_damage = round((attack_value + special_attack_value) / 2 * (10 / 100))
       min_precision = 40
@@ -66,7 +75,7 @@ defmodule Core.PokemonTest do
            attack: attack_value,
            special_attack: special_attack_value
          }
-       } = new_pokemon} = Pokemon.new(@pokemon_test_id)
+       } = new_pokemon} = Pokemon.build(@pokemon_test_id)
 
       {:ok,
        %Pokemon{
@@ -86,7 +95,7 @@ defmodule Core.PokemonTest do
       {:ok,
        %Pokemon{
          stats: %{defense: defense_value, special_defense: special_defense_value}
-       } = new_pokemon} = Pokemon.new(@pokemon_test_id)
+       } = new_pokemon} = Pokemon.build(@pokemon_test_id)
 
       {:ok,
        %Pokemon{
