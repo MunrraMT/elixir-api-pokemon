@@ -1,7 +1,7 @@
 defmodule ElixirApiPokemon.Core.Trainer do
   defstruct [:name, pokemons: %{}, number_pokemons: 0]
 
-  def new(name, initial_pokemon_id)
+  def build(name, initial_pokemon_id)
       when is_integer(initial_pokemon_id) and
              (initial_pokemon_id == 1 or
                 initial_pokemon_id == 4 or
@@ -9,7 +9,7 @@ defmodule ElixirApiPokemon.Core.Trainer do
     %__MODULE__{name: name} |> add_pokemon(initial_pokemon_id)
   end
 
-  def new(_name, _pokemon_id) do
+  def build(_name, _pokemon_id) do
     {:error, "not created"}
   end
 
