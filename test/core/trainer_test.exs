@@ -157,4 +157,42 @@ defmodule Core.TrainerTest do
       assert Trainer.change_order_pokemon(trainer, 3, 0) == {:error, trainer}
     end
   end
+
+  describe "get_random_trainer/1" do
+    test "should return a random trainer with initial pokemon when argument with value 1 is passed" do
+      {:ok, random_trainer} = Trainer.get_random_trainer(1)
+      %struct_name{} = random_trainer
+      number_pokemons = Map.get(random_trainer, :pokemons) |> Enum.count()
+
+      assert struct_name == Trainer
+      assert number_pokemons == 1
+    end
+
+    test "should return a random trainer with initial pokemon more 3 pokemons when argument with value 4 is passed" do
+      {:ok, random_trainer} = Trainer.get_random_trainer(4)
+      %struct_name{} = random_trainer
+      number_pokemons = Map.get(random_trainer, :pokemons) |> Enum.count()
+
+      assert struct_name == Trainer
+      assert number_pokemons == 4
+    end
+
+    test "should return an error and random trainer with initial pokemon when argument with value 0 is passed" do
+      {:error, random_trainer} = Trainer.get_random_trainer(0)
+      %struct_name{} = random_trainer
+      number_pokemons = Map.get(random_trainer, :pokemons) |> Enum.count()
+
+      assert struct_name == Trainer
+      assert number_pokemons == 1
+    end
+
+    test "should return an error and random trainer with initial pokemon when argument with value more than 6 is passed" do
+      {:error, random_trainer} = Trainer.get_random_trainer(7)
+      %struct_name{} = random_trainer
+      number_pokemons = Map.get(random_trainer, :pokemons) |> Enum.count()
+
+      assert struct_name == Trainer
+      assert number_pokemons == 1
+    end
+  end
 end
