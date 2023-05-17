@@ -14,7 +14,7 @@ defmodule ElixirApiPokemon.Core.Pokemon do
 
   alias ElixirApiPokemon.Api.PokeApi
 
-  def new(pokemon_id)
+  def build(pokemon_id)
       when is_integer(pokemon_id) and pokemon_id > 0 and pokemon_id < 150 do
     %{
       "id" => id,
@@ -45,8 +45,14 @@ defmodule ElixirApiPokemon.Core.Pokemon do
     {:ok, new_pokemon}
   end
 
-  def new(_pokemon_id) do
+  def build(_pokemon_id) do
     {:error, "not created"}
+  end
+
+  def get_random_pokemon() do
+    {pokemon_id, _name} = PokeApi.get_kanto_pokemons() |> Enum.random()
+
+    __MODULE__.build(pokemon_id)
   end
 
   def attack_strong(
