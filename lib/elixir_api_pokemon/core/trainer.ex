@@ -96,4 +96,31 @@ defmodule ElixirApiPokemon.Core.Trainer do
       ) do
     {:error, trainer}
   end
+
+  def get_random_trainer(1) do
+    random_initial_pokemon = [0, 3, 6] |> Enum.random()
+
+    __MODULE__.build("random_trainer", random_initial_pokemon)
+  end
+
+  def get_random_trainer(number_pokemons)
+      when is_integer(number_pokemons) and number_pokemons >= 2 and number_pokemons <= 6 do
+    {:ok, random_trainer} = __MODULE__.get_random_trainer(1)
+
+    trainer_with_pokemons =
+      2..number_pokemons
+      |> Enum.reduce(random_trainer, fn _number, random_trainer ->
+        pokemon_id = 0..149 |> Enum.random()
+        {:ok, new_trainer} = __MODULE__.add_pokemon(random_trainer, pokemon_id)
+
+        new_trainer
+      end)
+
+    {:ok, trainer_with_pokemons}
+  end
+
+  def get_random_trainer(_number_pokemons) do
+    {:ok, random_trainer} = __MODULE__.get_random_trainer(1)
+    {:error, random_trainer}
+  end
 end
