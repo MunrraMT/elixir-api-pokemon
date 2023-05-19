@@ -15,7 +15,7 @@ defmodule ElixirApiPokemon.Core.Pokemon do
   alias ElixirApiPokemon.Api.PokeApi
 
   def build(pokemon_id)
-      when is_integer(pokemon_id) and pokemon_id > 0 and pokemon_id < 150 do
+      when is_integer(pokemon_id) and pokemon_id >= 0 and pokemon_id <= 149 do
     %{
       "id" => id,
       "species" => %{"name" => name},
