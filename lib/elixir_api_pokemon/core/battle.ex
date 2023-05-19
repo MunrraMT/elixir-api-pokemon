@@ -20,4 +20,30 @@ defmodule ElixirApiPokemon.Core.Battle do
        status: :started
      }}
   end
+
+  def build_trainer_pokemon_battle(
+        %Trainer{
+          pokemons: %{0 => first_pokemon_id}
+        } = trainer,
+        computer_pokemons_number
+      ) do
+    {:ok,
+     %Trainer{
+       pokemons: %{0 => first_computer_pokemon_id}
+     } = random_computer} =
+      computer_pokemons_number
+      |> Trainer.get_random_trainer()
+
+    {:ok, first_computer_pokemon} = first_computer_pokemon_id |> Pokemon.build()
+    {:ok, first_pokemon} = first_pokemon_id |> Pokemon.build()
+
+    {:ok,
+     %__MODULE__{
+       player: trainer,
+       player_pokemon: first_pokemon,
+       computer_pokemon: first_computer_pokemon,
+       computer: random_computer,
+       status: :started
+     }}
+  end
 end
