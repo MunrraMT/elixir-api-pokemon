@@ -3,9 +3,9 @@ defmodule ElixirApiPokemon.Core.Trainer do
 
   def build(name, initial_pokemon_id)
       when is_integer(initial_pokemon_id) and
-             (initial_pokemon_id == 0 or
-                initial_pokemon_id == 3 or
-                initial_pokemon_id == 6) do
+             (initial_pokemon_id == 1 or
+                initial_pokemon_id == 4 or
+                initial_pokemon_id == 7) do
     %__MODULE__{name: name} |> add_pokemon(initial_pokemon_id)
   end
 
@@ -98,7 +98,7 @@ defmodule ElixirApiPokemon.Core.Trainer do
   end
 
   def get_random_trainer(1) do
-    random_initial_pokemon = [0, 3, 6] |> Enum.random()
+    random_initial_pokemon = [1, 4, 7] |> Enum.random()
 
     __MODULE__.build("random_trainer", random_initial_pokemon)
   end
@@ -110,7 +110,7 @@ defmodule ElixirApiPokemon.Core.Trainer do
     trainer_with_pokemons =
       2..number_pokemons
       |> Enum.reduce(random_trainer, fn _number, random_trainer ->
-        pokemon_id = 0..149 |> Enum.random()
+        pokemon_id = 1..150 |> Enum.random()
         {:ok, new_trainer} = __MODULE__.add_pokemon(random_trainer, pokemon_id)
 
         new_trainer
