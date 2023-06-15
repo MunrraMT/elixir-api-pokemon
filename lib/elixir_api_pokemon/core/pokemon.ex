@@ -15,7 +15,7 @@ defmodule ElixirApiPokemon.Core.Pokemon do
   alias ElixirApiPokemon.Api.PokeApi
 
   def build(pokemon_id)
-      when is_integer(pokemon_id) and pokemon_id >= 0 and pokemon_id <= 149 do
+      when is_integer(pokemon_id) and pokemon_id >= 1 and pokemon_id <= 150 do
     %{
       "id" => id,
       "species" => %{"name" => name},
@@ -109,5 +109,11 @@ defmodule ElixirApiPokemon.Core.Pokemon do
     }
 
     {:ok, new_pokemon}
+  end
+
+  def recebe_damage(damage, %__MODULE__{stats: %{life_points: life_points_value}} = pokemon)
+      when is_integer(damage) and damage >= 0 do
+    new_life_points = life_points_value - damage
+    {:ok, %__MODULE__{pokemon | stats: %{life_points: new_life_points}}}
   end
 end
